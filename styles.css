@@ -1,0 +1,956 @@
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    color: #000000;
+    font-family: georgia;
+    position: relative;
+    border-radius: 0px;
+    background-color: rgb(0, 0, 0);
+}
+
+.dashboard-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+    background-size: 85%;
+    background-position: center;
+    z-index: 0;
+}
+
+.sidebar,
+.content {
+    position: relative;
+    z-index: 3;
+}
+
+.sidebar {
+    width: 336px;
+    background-color: rgb(8, 67, 74);
+    color: white;
+    padding: 28px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.logo-container {
+    margin-bottom: 25px;
+}
+
+.logo {
+    width: 290px;
+    height: auto;
+}
+
+.bounce {
+    animation: bounce 7s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.sidebar h2 {
+    font-size: 28px;
+    margin-bottom: 48px;
+    text-align: left;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar li {
+    padding: 25px 10px;
+    cursor: pointer;
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+.sidebar li i {
+    margin-right: 20px;
+}
+
+.sidebar li.active {
+    background-color: rgb(30, 100, 113);
+    border-radius: 15px;
+}
+
+.sidebar li:hover {
+    background-color: rgb(30, 100, 113); /* Highlight on hover */
+    border-radius: 15px;
+}
+
+.content {
+    flex: 1;
+    padding: -95px;
+    background-color: #ffffff;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 45px;
+    margin-bottom: 10px;
+    color: #000000;
+    margin-left: 50px;
+}
+    /* Basic styles for the boxes */
+    .clickable-boxes {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 4 equal-width columns */
+        grid-gap: 35px; /* Space between boxes */
+        margin-top: 45px; /* Space above the boxes */
+        margin-left: 100px;
+        padding: 10px; /* Padding inside the container */
+        font-size: 23px;
+        width: 100%;
+        max-width: 1250px;
+        font-weight: 550;
+        font-family: Garamond;
+    }
+    
+    .box {
+        padding: 34px;
+        border-radius: 10px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor on hover */
+        text-align: center; /* Centered text */
+        transition: transform 0.7s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        background-color: #ffffffd2; /* Light background for boxes */
+        border-left: 22px solid rgb(11, 81, 88); /* Stylish left border */
+        border-top: 1px solid rgb(0, 0, 0); /* Stylish left border */
+        border-right: 1px solid rgb(0, 0, 0); /* Stylish left border */
+        border-bottom: 1px solid rgb(0, 0, 0); /* Stylish left border */
+        box-shadow: 10 30px 20px rgba(0, 0, 0, 0.123); /* Soft shadow for depth */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 200px; /* Fixed height for all boxes */
+    }
+    
+    .box:hover {
+        transform: translateY(-5px); /* Hover effect: move up */
+        box-shadow: 0 18px 22px rgba(0, 0, 0, 0.15); /* Increase shadow on hover */
+    }
+    
+    .box i {
+        font-size: 3.52rem; /* Icon size */
+        color: rgb(8, 67, 74); /* Icon color */
+        transition: color 0.3s ease; /* Smooth color transition on hover */
+        margin-bottom: 20px; /* Space between icon and text */
+    }
+    
+    .box:hover i {
+        color: #0755079d; /* Change icon color on hover */
+    }
+    
+    .box span {
+        font-size: large;
+        color: #000000; /* Text color */
+        transition: color 0.3s ease; /* Smooth color transition on hover */
+    }
+    
+    .box:hover span {
+        color: #075507ba; /* Change text color on hover */
+    }
+    
+    /* Responsive Design: On smaller screens, make the grid a single column */
+    @media (max-width: 768px) {
+        .clickable-boxes {
+            grid-template-columns: 1fr; /* Single column on smaller screens */
+        }
+    }
+    
+
+    .content-section {
+        display: none; /* Initially hide all sections */
+    }
+
+    .content-section.active {
+        display: block; /* Show the active section */
+    }
+/* Container styling */
+.dashboard-container {
+    position: relative;
+    overflow: hidden; /* Hide excess from background overlay */
+}
+
+/* Background overlay with blur effect */
+.dashboard-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('logo/logo_kontel.png');
+    background-size: 1700px;
+    background-position: center;
+    z-index: 1; /* Keep background behind content */
+    border-color: darkgreen;
+}
+
+/* Sidebar and main content positioning */
+.sidebar, .content {
+    position: relative; /* Ensure content layers above background */
+    z-index: 2;
+}
+/* Sidebar link styling */
+.nav-link {
+    padding: 10px;
+    transition: all 0.5s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Highlight background on hover */
+.nav-link:hover {
+    background-color: rgba(0, 123, 255, 0.2); /* Adjust to preferred highlight color */
+    border-radius: 0px;
+}
+
+/* Bump (zoom) effect */
+.nav-link.bounce-hover {
+    animation: bounce-diagonal 0.4s infinite alternate ease-in-out;
+}
+
+/* Keyframes for bump zoom effect */
+@keyframes bounce-diagonal {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(2.05);
+    }
+}
+/* Sidebar link highlight effect */
+.sidebar .nav-link {
+    position: relative;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar .nav-link:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: bump 0.6s infinite alternate; /* Continuous bump animation */
+}
+
+
+.clickable-boxes .box:hover {
+    transform: scale(2.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: bump 0.6s infinite alternate;
+}
+
+/* Bump animation keyframes */
+@keyframes bump {
+    0% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+
+
+
+
+#status-content h1 {
+    font-size: 33px;       /* Title size */
+    color: #ffffff;           /* Title color */
+    background-color: rgb(8, 67, 74); /* Semi-transparent background */
+    padding: 17px;         /* Add padding around the text */
+    font-family: Garamond;
+    margin-top: -10px;
+    margin-left: -17px;
+    text-align: center;
+}
+#status-content h2 {
+    margin-left: 40px;
+    padding: 20px;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.764);
+    text-align: center;
+    margin-top: 10px;
+}
+
+#requests-content h1 {
+    font-size: 33px;       /* Title size */
+    color: #ffffff;           /* Title color */
+    background-color: rgb(8, 67, 74); /* Semi-transparent background */
+    padding: 17px;         /* Add padding around the text */
+    margin-top: -10px;
+    margin-left: -17px;
+    font-family: Garamond;
+    text-align: center;
+}
+#requests-content h2 {
+    margin-left: 40px;
+    padding: 20px;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.764);
+    text-align: center;
+    margin-top: 10px;
+}
+
+#dashboard-content h1{
+    font-family: Garamond;
+    font-size: 25px;       /* Title size */
+    color: #ffffff;           /* Title color */
+    background-color: rgb(8, 67, 74); /* Semi-transparent background */
+    padding: 21px;         /* Add padding around the text */
+    margin-top: -10px;
+    margin-left: -17px;
+    text-align: right;
+}
+h1 i.fas.fa-smile {
+    color: #fffb24; /* Happy yellow color */
+    margin-left: 10px;
+    font-size: 1.0em;
+}
+h1 i.fas.fa-grin {
+    color: #fffb24; /* Happy yellow color */
+    margin-left: 10px;
+    font-size: 1.0em;
+}
+
+#statistics-content h1 {
+    font-size: 33px;       /* Title size */
+    color: #ffffff;           /* Title color */
+    background-color: rgb(8, 67, 74); /* Semi-transparent background */
+    padding: 17px;         /* Add padding around the text */
+    margin-top: -32px;
+    margin-left: -37px;
+    font-family: Garamond;
+    text-align: center;
+}
+
+#form-content h1 {
+    font-family: Garamond;
+    font-size: 33px;       /* Title size */
+    color: #ffffff;           /* Title color */
+    background-color: rgb(8, 67, 74); /* Semi-transparent background */
+    padding: 17px;         /* Add padding around the text */
+    margin-top: -10px;
+    margin-left: -17px;
+    text-align: center;
+}
+
+#gestion-content h1 {
+    font-family: Garamond;
+    font-size: 33px;       /* Title size */
+    color: #ffffff;           /* Title color */
+    background-color: rgb(8, 67, 74); /* Semi-transparent background */
+    width: 1470px;
+    padding: 17px;         /* Add padding around the text */
+    margin-top: -10px;
+    margin-left: -17px;
+    text-align: center;
+}
+
+#parametres-content h1{
+    font-family: Garamond;
+    font-size: 33px;       /* Title size */
+    color: #ffffff;           /* Title color */
+    background-color: rgb(8, 67, 74); /* Semi-transparent background */
+    padding: 17px;         /* Add padding around the text */
+    margin-top: -10px;
+    margin-left: 17px;
+    text-align: center;
+}
+
+#about-content h1 {
+    font-size: 33px;       /* Title size */
+    color: #ffffff;           /* Title color */
+    background-color: rgb(8, 67, 74); /* Semi-transparent background */
+    padding: 19px;         /* Add padding around the text */
+    font-family: Georgia;
+    text-align: center;
+    margin-left: -190px;
+    margin-top: -12px;
+}
+
+/* A propos du logiciel*/
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+#about-content {
+    max-width: 100%;
+    width:98%;
+    margin: 0 auto;
+    padding: 10px -50px;
+    overflow-y: auto; /* Allows vertical scrolling */
+    height: 95vh; /* Occupies full viewport height */
+}
+
+#about-content h1 {
+    text-align: center;
+    font-size: 30px;
+    color: #ffffff;
+    margin-left: -90px;
+}
+
+#about-content h2 {
+    font-size: 1.8rem;
+    color: #145768;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-top: 25px;
+    font-family: Garamond;
+}
+
+#about-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #000000;
+    padding: 10px 0;
+}
+
+#about-content p:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+
+
+/* Application Form styling */
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 420px); /* Fixed 3 columns, each 370px wide */
+    gap: 20px;
+    justify-content: center; /* Center the grid within the container */
+    padding: 20px;
+}
+
+.icon-item {
+    text-decoration: none;
+}
+
+.icon-box {
+    background-color: #efefefd2;
+    border-right: 10px solid rgb(11, 81, 88); /* Stylish left border */
+    border-top: 1px solid rgb(0, 0, 0); /* Stylish left border */
+    border-left: 1px solid rgb(0, 0, 0); /* Stylish left border */
+    border-bottom: 1px solid rgb(0, 0, 0); /* Stylish left border */
+    border-radius: 10px;
+    width: 410px; /* Fixed width */
+    height: 270px; /* Fixed height */
+    text-align: center;
+    color: #000000;
+    box-shadow: 0 40px 28px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.icon-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.icon-box i {
+    font-size: 60px; /* Large icon size */
+    color: rgb(8, 67, 74); /* Customize icon color */
+    margin-bottom: 20px;
+}
+
+.icon-box p {
+    font-size: 23px;
+    font-weight: 500;
+    margin: 0;
+    color: #000000;
+    font-weight: 550;
+    font-family: Garamond;
+}
+
+.icon-box:hover p {
+    color: #045160; /* Darker text color on hover */
+}
+
+/* Container styling */
+#parametres-content {
+    margin-left: 50px;  
+    border-radius: 12px;
+}
+
+#parametres-content h1{
+    margin-left: -70px;
+}
+
+
+
+/* Password  styling */
+.settings-options-container {
+    display: flex;
+    justify-content: space-between; /* Distribute options evenly */
+    align-items: center;
+    padding: 50px; /* Increased padding for more space */
+    height: 7vh; /* Ensure container takes full height of the page */
+}
+
+/* Individual option styling */
+.settings-option {
+    display: flex;
+    align-items: center;
+    padding: 7px 30px; /* Increased padding for bigger buttons */
+    margin: 0 15px; /* Added margin between the two options */
+    border-radius: 8px;
+    background-color: #d5f5e35b;
+    border-left: 13px solid transparent; /* Default transparent border */
+    border-bottom: 1px solid #000000;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Ensure each option takes up equal space */
+    height: 100%; /* Ensure each option takes full height */
+    justify-content: left; /* Horizontally center the content */
+    text-align: left;
+
+}
+
+.settings-option:hover {
+    background-color: #a7d7bcd0;
+    transform: scale(1.02);
+    border-left: 6px solid #4a5568; /* Darker on hover for emphasis */
+}
+
+/* Icon styling */
+.settings-option i {
+    font-size: 2.0rem; /* Larger icons for better visibility */
+    color: #4a5568; /* Neutral, secure color */
+    margin-right: 20px; /* Increased space between icon and text */
+}
+
+/* Text styling */
+.settings-option span {
+    font-size: 1.2rem; /* Increased font size */
+    font-weight: 550;
+    color: #0d0d0e; /* Dark, professional color */
+    letter-spacing: 0.7px; /* Increased letter spacing for better readability */
+}
+
+/* Styling for 'Changer le mot de passe' */
+.settings-option.change-password {
+    border-left: 13px solid #e53e3e; /* Red border for change password */
+}
+
+/* Styling for 'Modifier les informations personnelles' */
+.settings-option.edit-profile {
+    border-left: 13px solid #15A96C; /* Green border for edit profile */
+}
+
+/* Password-specific styling */
+.settings-option .fa-key {
+    color: #9b2323; /* Red accent for "change password" */
+}
+
+.settings-option .fa-user-edit {
+    color: rgb(11, 100, 82); /* Blue accent for "edit profile" */
+}
+
+/* Pop-Up Form Styling */
+.popup-form {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.567); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #ffffff;
+    padding: 30px; /* Increased padding */
+    border-radius: 8px;
+    width: 800px; /* Adjust width as needed */
+    height: auto;
+    text-align: left;
+    box-sizing: border-box;
+    font-size: 16px; /* Increased font size */
+    margin-left: 350px;
+}
+
+.popup-content h2 {
+    text-align: center;
+    font-size: 1.5em; /* Larger heading */
+    margin-bottom: 20px; /* Space between title and form */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Increased spacing between fields */
+}
+
+.form-group label {
+    display: block;  /* Ensures the label is placed above the input field */
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.1em; /* Larger font size for labels */
+}
+
+.popup-content input {
+    width: 100%;
+    padding: 12px; /* Increased padding */
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 1em; /* Larger font size for input fields */
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.update-btn {
+    padding: 12px 20px;
+    background: #064946; /* Dark green */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 48%;
+    font-size: 1.1em; /* Larger button text */
+}
+
+.update-btn:hover {
+    background-color: #052e27; /* Darker green on hover */
+}
+
+
+
+
+
+
+
+
+
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0px;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.85); /* Dark background with opacity */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: auto; /* Center modal */
+    padding: 10px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Shadow effect */
+    width: 90%; /* Increased width of the modal */
+    max-width: 900px; /* Max width for larger screens */
+    position: relative;
+    margin-top: 230px;
+    font-size: 20px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 35px; /* Slightly larger size for close button */
+    color: #ffffff; /* Dark gray color */
+    transition: color 0.3s ease;
+    width: 80%;
+    max-width: 60px;
+    margin-left: -100px;
+    height: 55px;
+}
+
+
+h2 {
+    margin-top: 0; /* Remove default margin */
+    text-align: left;
+    padding-bottom: 20px;
+}
+
+/* Form Styles */
+.left-column, .right-column {
+    float: left;
+    width: calc(50% - 20px); /* Adjust for spacing between columns */
+}
+
+.left-column:last-child, .right-column:last-child {
+    margin-right: 0; /* Remove margin from last column */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px; /* Space between label and input */
+    font-weight: bold; /* Bold labels for emphasis */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="password"],
+select {
+    width: calc(100% - 70px); /* Full width minus padding */
+    padding: 17px;
+    font-size: 18px;
+    border-radius: 5px; /* Rounded corners for inputs */
+    border: 1px solid #053b3143; /* Light border color */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #0c5445; /* Highlight border on focus with blue color */
+}
+
+/* Submit Button Styles */
+.form-footer {
+    clear: both; /* Clear floats */
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+}
+
+.submit-btn {
+    background-color: #0c6636e4; /* Blue color for button */
+    color: rgb(255, 255, 255);
+    padding: 12px 24px;
+    border-radius: 5px; /* Rounded corners for button */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effect */
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background-color: #0b6623; /* Darker blue on hover */
+}
+
+#employeeModal label {
+    font-size: 20px;
+    margin-top: 10px;
+}
+#employeeModal input {
+    font-size: 18px;
+}
+/* Add Employee Button Styles */
+#addEmployeeBtn {
+   background-color: #1c6243; /* Green color for Add Employee button */
+   color: white;
+   padding: 15px 14px;
+   border: none;
+   cursor: pointer;
+   transition: background-color 0.3s ease, transform 0.2s ease;
+   height: 50px;
+   margin-left: 1340px;
+   font-size: 16px;
+}
+
+#addEmployeeBtn:hover {
+   background-color: #1f7d5c; /* Darker green on hover */
+}
+
+/* Table Styles */
+.table-container {
+    max-width: 1600px; /* Reduced size of the table container */
+    overflow-x:auto; /* Enable horizontal scrolling for small screens */ 
+    margin-top:-1.9rem; 
+    font-size: 25px;
+    max-height: 750px;
+ }
+
+.employee-table {
+   width: auto; /* Allow table to shrink to fit content without stretching too wide */ 
+   min-width:900px; /* Minimum width to ensure readability on small screens */ 
+}
+
+.employee-table th,
+.employee-table td {
+   padding:.8rem; /* Padding inside cells */ 
+   text-align:left; /* Align text to the left */ 
+}
+
+.employee-table th {
+   background-color:#05352dd4; /* Unique blue background for header */ 
+   color:white; /* White text for contrast against header background */ 
+}
+
+.employee-table tr:nth-child(even) {
+   background-color:#f2f2f2; /* Light gray for even rows for better readability*/ 
+}
+
+.employee-table tr:hover {
+   background-color:#e6f7ff; /* Light blue highlight on row hover*/ 
+}
+
+/* Edit and Delete Button Styles */
+.edit-btn,
+.delete-btn {
+   text-decoration:none; 
+   padding:.3rem .35rem;
+   border-radius:.25rem;
+   font-size: 14px;
+}
+
+.edit-btn {
+   background-color:#ffc107; /* Yellow for Edit button */ 
+   color:black; 
+}
+
+.delete-btn {
+   background-color:#dc3545; /* Red for Delete button */ 
+   color:white; 
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+   opacity:.7;
+}
+
+
+/*  Modal Styles for Employee Details  */
+
+button.view-btn {
+    padding: 6px 12px;
+    background-color: #1a6a1a;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button.view-btn:hover {
+    background-color: #4cae4c;
+}
+
+/* Close button */
+.close-btn {
+    color: #ffffff;
+    font-size: 50px;
+    font-weight: bold;
+    float: right;
+    margin-left: -148px;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+input {
+    font-size: 20px;
+}
+
+#employeeDetailsModal {
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    position: fixed; /* Stays on screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+#employeeDetailsModal label {
+    font-size: 22px;
+}
+#employeeDetailsModal input {
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.modal-content {
+    position: absolute;
+    top: -15%;
+    right: 20%;
+    width: 40%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

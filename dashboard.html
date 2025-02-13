@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your external CSS file -->
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="logo/logo_kontel.png" alt="Logo Kontel" class="logo bounce" />
+            </div>
+            <h2>Page d'administration</h2>
+            <ul>
+                <li onclick="navigateTo('dashboard.html')" class="nav-link">
+                    <i class="fas fa-home"></i> Dashboard
+                </li>
+                <li onclick="navigateTo('matérieldemandé.html')" class="nav-link">
+                    <i class="fas fa-box"></i> Matériel demandé
+                </li>
+                <li onclick="navigateTo('statusdudemande.html')" class="nav-link">
+                    <i class="fas fa-clipboard-check"></i> Status du demande
+                </li>
+                <li onclick="navigateTo('statistiques.html')" class="nav-link">
+                    <i class="fas fa-chart-bar"></i> Statistiques
+                </li>
+                <li onclick="navigateTo('apropos.html')" class="nav-link">
+                    <i class="fas fa-info-circle"></i> A propos du logiciel
+                </li>
+                <li onclick="navigateTo('déconnexion.html')" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Welcome to the Dashboard</h1>
+            <div class="clickable-boxes">
+                <div class="box" onclick="navigateTo('dashboard.html')">
+                    <h2>Dashboard</h2>
+                </div>
+                <div class="box" onclick="navigateTo('matérieldemandé.html')">
+                    <h2>Matériel demandé</h2>
+                </div>
+                <div class="box" onclick="navigateTo('statusdudemande.html')">
+                    <h2>Status du demande</h2>
+                </div>
+                <div class="box" onclick="navigateTo('statistiques.html')">
+                    <h2>Statistiques</h2>
+                </div>
+                <div class="box" onclick="navigateTo('apropos.html')">
+                    <h2>A propos du logiciel</h2>
+                </div>
+                <div class="box" onclick="navigateTo('déconnexion.html')">
+                    <h2>Déconnexion</h2>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            // Update active link in sidebar
+            const sidebarLinks = document.querySelectorAll('.sidebar li');
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Add active class to the clicked link
+            const activeLink = Array.from(sidebarLinks).find(link => link.textContent.trim() === page.split('.')[0].replace(/_/g, ' ').toUpperCase());
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+
+            // Redirect to the corresponding page
+            window.location.href = page;
+        }
+
+        function setActiveLinkFromURL() {
+            // Get the current page from the URL
+            const currentPage = window.location.pathname.split('/').pop(); // Get the current file name
+
+            // Highlight the appropriate link based on the current page
+            navigateTo(currentPage);
+        }
+
+        // Initialize the sidebar active link
+        setActiveLinkFromURL();
+    </script>
+
+    <style>
+        /* Styles for clickable boxes */
+        .clickable-boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .box {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .box:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</body>
+</html>
